@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import SearchBar from './SearchBar.jsx';
+import Events from './Events.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -34,6 +35,7 @@ class App extends React.Component {
   }
 
   render() {
+  	const { events } = this.state;
   	return (
       <div>
         <h1>Event Finder</h1>
@@ -41,6 +43,8 @@ class App extends React.Component {
       	  handleChange={this.handleSearchBarChange}
       	  handleSubmit={this.handleSearchBarSubmit} 
       	/>
+      	<h1>Events</h1>
+      	<Events events={events} />
       </div>
   	);
   }
