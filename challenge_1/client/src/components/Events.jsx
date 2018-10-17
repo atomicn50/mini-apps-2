@@ -3,7 +3,8 @@ import Event from './Event.jsx';
 
 const Events = ({ events }) => (
   <div>
-    {events.map(event => <Event event={event} />)}
+  	<h1>Events</h1>
+    {events.map(event => <Event event={event} key={event.description} />)}
   </div>
 );
 

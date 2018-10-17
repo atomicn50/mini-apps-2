@@ -2,8 +2,8 @@ import React from 'react';
 
 const Event = ({ event }) => (
   <div>
-    <p>{event.date}</p>
-    <p>{event.description}</p>
+    <p>Date: {event.date}</p>
+    <p>Description: {event.description}</p>
   </div>
 );
 
