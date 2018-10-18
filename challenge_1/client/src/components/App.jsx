@@ -9,8 +9,9 @@ class App extends React.Component {
   	super(props);
   	this.state = {
   	  searchTerm: '',
-  	  page: 1,
   	  events: [],
+  	  page: 1,
+  	  pageCount: 10,
   	};
   	this.handleSearchBarChange = this.handleSearchBarChange.bind(this);
   	this.handleSearchBarSubmit = this.handleSearchBarSubmit.bind(this);
@@ -34,11 +35,17 @@ class App extends React.Component {
   	})
   }
 
+  parseData(response) {
+  	this.setState({
+  	  events: response.data,
+  	  pageCount: Math.ceil(response.headers['x-total-count'] / 10),
+  	});
+  }
+
   getEvents() {
   	const { searchTerm, page } = this.state;
     axios.get(`/events?q=${searchTerm}&_page=${page}&_limit=10`)
-      .then(response => response.data)
-      .then(events => this.setState({events}))
+      .then(response => console.log(response))
       .catch(err => console.log(err));
   }
 
@@ -54,7 +61,7 @@ class App extends React.Component {
       	  <ReactPaginate 
             previousLabel={'<'}
             nextLabel={'>'}
-            pageCount={20}
+            pageCount={this.state.pageCount}
             marginPagesDisplayed={2}
             pageRangeDisplayed={5}
             onPageChange={this.handlePageClick}
