@@ -24,13 +24,14 @@ class App extends React.Component {
   }
 
   handleSearchBarSubmit() {
-  	const { searchTerm, page } = this.state;
-    this.getEvents(searchTerm);
+    this.getEvents();
   }
 
   handlePageClick(data) {
   	const page = data.selected;
-  	this.setState({page}, () => {this.getEvents()});
+  	this.setState({page: page + 1}, () => {
+  	  this.getEvents();
+  	})
   }
 
   getEvents() {
@@ -42,23 +43,23 @@ class App extends React.Component {
   }
 
   render() {
-  	const { events } = this.state;
   	return (
       <div>
       	<SearchBar 
       	  handleChange={this.handleSearchBarChange}
       	  handleSubmit={this.handleSearchBarSubmit} 
       	/>
-      	<Events events={events} />
-      	<ReactPaginate 
-          previousLabel={'previous'}
-          nextLabel={'next'}
-          breakLabel={<a href="">...</a>}
-          pageCount={10}
-          marginPagesDisplayed={2}
-          pageRangeDisplayed={5}
-          onPageChange={this.handlePageClick}
-        />
+      	<Events events={this.state.events} />
+      	<div className="pagination">
+      	  <ReactPaginate 
+            previousLabel={'<'}
+            nextLabel={'>'}
+            pageCount={20}
+            marginPagesDisplayed={2}
+            pageRangeDisplayed={5}
+            onPageChange={this.handlePageClick}
+          />
+        </div>
       </div>
   	);
   }
