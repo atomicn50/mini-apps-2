@@ -40,6 +40,11 @@ const SearchBar = ({ handleChange, handleClick }) => (
       </div>
     <div>
       <br />
+      Year
+      <input placeholder="Enter Year" id="year" onChange={handleChange} />
+    </div>
+    <div>
+      <br />
       <button type="submit" onClick={handleClick}>Search</button>
     </div>
   </div>

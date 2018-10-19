@@ -1,7 +1,7 @@
 const options = {
   title: {
     display: true,
-    text: 'Bitcoin Prices for 2018',
+    text: 'Bitcoin Prices',
     fontSize: 20,
     fontColor: '#2C8952',
   },

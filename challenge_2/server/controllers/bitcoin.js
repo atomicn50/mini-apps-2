@@ -1,13 +1,11 @@
 const axios = require('axios');
 
-exports.getDataForLatestMonth = (callback) => {
-  axios.get('https://api.coindesk.com/v1/bpi/historical/close.json')
-    .then(response => callback(null, response))
-    .catch(err => callback(err));
+const route = (startMonth, endMonth, year) => {
+  return `https://api.coindesk.com/v1/bpi/historical/close.json?start=${year}-${startMonth}-01&end=${year}-${endMonth}-01`;
 }
 
-exports.getDataForSpecifiedMonths = (startMonth, endMonth, callback) => {
-  axios.get(`https://api.coindesk.com/v1/bpi/historical/close.json?start=2018-${startMonth}-01&end=2018-${endMonth}-01`)
+exports.getDataForSpecifiedMonths = (startMonth, endMonth, year, callback) => {
+  axios.get(route(startMonth, endMonth, year))
     .then(response => callback(null, response))
     .catch(err => callback(err));
 }

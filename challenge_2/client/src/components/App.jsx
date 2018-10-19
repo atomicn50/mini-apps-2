@@ -7,35 +7,30 @@ class App extends React.Component {
   constructor(props) {
   	super(props);
   	this.state = {
-  	  startMonth: '',
-  	  endMonth: '',
+  	  startMonth: '09',
+  	  endMonth: '10',
+      year: '2018',
   	};
   	this.handleChange = this.handleChange.bind(this);
   	this.handleClick = this.handleClick.bind(this);
+    this.renderChart = this.renderChart.bind(this);
   }
 
   componentDidMount() {
-	this.renderChart();
+	  this.renderChart(this.state.startMonth, this.state.endMonth, this.state.year);
   }
 
-  renderChart() {
-  	axios.get('/api/bitcoin')
+  renderChart(startMonth, endMonth, year) {
+  	axios.get('/api/bitcoin', {
+      params : {
+        startMonth,
+        endMonth,
+        year,
+      }
+    })
 	  .then(response => response.data)
 	  .then(data => makeChart(data, 'line', 'chart'))
 	  .catch(err => console.log(err));
-  }
-
-  renderNewChart() {
-    const { startMonth, endMonth } = this.state;
-    axios.get('/api/bitcoin/search', {
-      params: {
-      	startMonth,
-      	endMonth,
-      }
-    })
-      .then(response => response.data)
-      .then(data => makeChart(data, 'line', 'chart'))
-      .catch(err => console.log(err));
   }
 
   handleChange(e) {
@@ -45,7 +40,7 @@ class App extends React.Component {
   }
 
   handleClick() {
-  	this.renderNewChart();
+  	this.renderChart(this.state.startMonth, this.state.endMonth, this.state.year);
   }
 
   render() {
