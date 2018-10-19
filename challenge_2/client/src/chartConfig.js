@@ -1,7 +1,7 @@
 const options = {
   title: {
     display: true,
-    text: 'Bitcoin Prices for Past Month',
+    text: 'Bitcoin Prices for 2018',
     fontSize: 20,
     fontColor: '#2C8952',
   },
@@ -17,7 +17,7 @@ const options = {
     yAxes: [{
       scaleLabel: {
         display: true,
-        labelString: 'Bitcoin Price (USD)',
+        labelString: 'Closing Price (USD)',
         fontSize: 15,
       },
     }],
