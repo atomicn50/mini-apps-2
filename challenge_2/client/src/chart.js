@@ -1,26 +1,11 @@
-import Chart from 'chart.js';
 import axios from 'axios';
+import makeChart from './utils/chartGenerator.js';
 
-// axios.get('https://api.coindesk.com/v1/bpi/historical/close.json')
-//   .then(response => {console.log(response)})
+let myChart;
 
-const ctx = 'chart';
-const myChart = new Chart(ctx, {
-  type: 'line',
-  data: [],
-  options: {
-    scales: {
-      xAxes: [{
-        type: 'time',
-        time: {
-          unit: 'month',
-          displayFormats: {
-            month: 'MMM YYYY'
-            }
-        }
-      }]
-    }
-  }
-});
+axios.get('https://api.coindesk.com/v1/bpi/historical/close.json')
+  .then(response => response.data.bpi)
+  .then(data => makeChart(data, 'line', 'chart'))
+  .catch(err => console.log(err));
 
 export default myChart;
